@@ -62,7 +62,7 @@ _global_script_class_icons={
 
 [application]
 
-config/name="Topdown Shooter Tutorial"
+config/name="D210044A_D210022A_Defence_Against_Zombie"
 run/main_scene="res://UI/MainMenuScreen.tscn"
 config/icon="res://icon.png"
 

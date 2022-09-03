@@ -24,6 +24,7 @@ onready var sprite = $Sprite
 onready var reload_timer = $Reload_timer
 onready var shoot_point = $Shoot_point
 onready var hit_timer = $Hit_timer
+onready var guneffect = $AudioStreamPlayer
 
 func _ready():
 	get_tree().connect("network_peer_connected", self, "_network_peer_connected")
@@ -55,7 +56,9 @@ func _process(delta: float) -> void:
 			look_at(get_global_mouse_position())
 			
 			if Input.is_action_pressed("left") and can_shoot and not is_reloading:
+				guneffect.play()
 				rpc("instance_bullet", get_tree().get_network_unique_id())
+				
 				is_reloading = true
 				reload_timer.start()
 		else:

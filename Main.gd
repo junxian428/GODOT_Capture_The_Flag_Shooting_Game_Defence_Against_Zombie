@@ -20,7 +20,12 @@ onready var timer = $Timer
 func _ready() -> void:
 	randomize()
 	GlobalSignals.connect("bullet_fired", bullet_manager, "handle_bullet_spawned")
-
+	#print(GlobalSignals.HARD)
+	if(GlobalSignals.HARD):
+		print("Difficult Mode")
+	else:
+		print("Easy Mode")
+		
 	var ally_respawns = $AllyRespawnPoints
 	var enemy_respawns = $EnemyRespawnPoints
 

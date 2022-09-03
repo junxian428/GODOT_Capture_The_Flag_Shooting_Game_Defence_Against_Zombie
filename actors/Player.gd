@@ -47,7 +47,13 @@ func get_team() -> int:
 
 
 func handle_hit():
-	health_stat.health -= 20
+	if(GlobalSignals.HARD):
+		print("Difficult Mode: Damage Receieved: 50")
+		health_stat.health -= 50
+	else:
+		print("Easy Mode: Damage Received: 20")
+		health_stat.health -= 20
+		
 	emit_signal("player_health_changed", health_stat.health)
 	if health_stat.health <= 0:
 		var damage = GlobalSignals.DAMAGE
