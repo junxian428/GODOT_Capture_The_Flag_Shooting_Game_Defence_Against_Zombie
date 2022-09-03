@@ -1,0 +1,105 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Base_font.tres" type="DynamicFont" id=1]
+[ext_resource path="res://Server_browser.gd" type="Script" id=2]
+[ext_resource path="res://Server_listener.tscn" type="PackedScene" id=3]
+
+[node name="Server_browser" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 2 )
+
+[node name="Background_panel" type="Panel" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 96.0
+margin_top = 162.0
+margin_right = -95.9999
+margin_bottom = -53.9999
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Manual_setup" type="Button" parent="Background_panel"]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -130.0
+margin_top = -516.0
+margin_right = 313.0
+margin_bottom = -371.0
+rect_scale = Vector2( 0.425319, 0.469264 )
+custom_fonts/font = ExtResource( 1 )
+text = "Manual Setup"
+
+[node name="Go_back" type="Button" parent="Background_panel"]
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_left = -53.0
+margin_top = -521.0
+margin_right = 390.0
+margin_bottom = -376.0
+rect_scale = Vector2( 0.306105, 0.509175 )
+custom_fonts/font = ExtResource( 1 )
+text = "Go Back"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Server_ip_text_edit" type="LineEdit" parent="Background_panel"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -194.0
+margin_top = -280.0
+margin_right = 612.0
+margin_bottom = -175.0
+rect_scale = Vector2( 0.414881, 0.587104 )
+custom_fonts/font = ExtResource( 1 )
+align = 1
+
+[node name="Type_in_server_ip" type="Label" parent="Background_panel/Server_ip_text_edit"]
+anchor_right = 1.0
+margin_left = 28.9238
+margin_top = -124.339
+margin_right = 28.9238
+margin_bottom = -19.3391
+rect_scale = Vector2( 0.841748, 1.25032 )
+custom_fonts/font = ExtResource( 1 )
+text = "Type in Server IP"
+align = 1
+valign = 1
+
+[node name="Join_server" type="Button" parent="Background_panel/Server_ip_text_edit"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -188.481
+margin_top = 73.5424
+margin_right = 254.519
+margin_bottom = 218.542
+rect_scale = Vector2( 0.827609, 0.515611 )
+custom_fonts/font = ExtResource( 1 )
+text = "Join Server"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Background_panel"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 70.0
+margin_top = 40.0
+margin_right = -70.0
+margin_bottom = -175.0
+
+[node name="Server_listener" parent="." instance=ExtResource( 3 )]
+
+[connection signal="pressed" from="Background_panel/Manual_setup" to="." method="_on_Manual_setup_pressed"]
+[connection signal="pressed" from="Background_panel/Go_back" to="." method="_on_Go_back_pressed"]
+[connection signal="pressed" from="Background_panel/Server_ip_text_edit/Join_server" to="." method="_on_Join_server_pressed"]
+[connection signal="new_server" from="Server_listener" to="." method="_on_Server_listener_new_server"]
+[connection signal="remove_server" from="Server_listener" to="." method="_on_Server_listener_remove_server"]

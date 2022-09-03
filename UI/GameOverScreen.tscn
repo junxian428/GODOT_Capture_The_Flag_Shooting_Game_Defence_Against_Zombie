@@ -1,0 +1,143 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://UI/roboto_mono_36.tres" type="DynamicFont" id=1]
+[ext_resource path="res://UI/roboto_mono_64.tres" type="DynamicFont" id=2]
+[ext_resource path="res://UI/GameOverScreen.gd" type="Script" id=3]
+
+[sub_resource type="Animation" id=2]
+resource_name = "fade"
+length = 4.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("Overlay:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 2, 4 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("PanelContainer:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, true ]
+}
+
+[sub_resource type="StyleBoxFlat" id=1]
+bg_color = Color( 0.231373, 0.231373, 0.231373, 1 )
+border_width_left = 10
+border_width_top = 10
+border_width_right = 10
+border_width_bottom = 10
+border_color = Color( 0, 0, 0, 1 )
+
+[sub_resource type="StyleBoxFlat" id=3]
+bg_color = Color( 0, 0, 0, 1 )
+
+[node name="GameOverScreen" type="CanvasLayer"]
+pause_mode = 2
+script = ExtResource( 3 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/fade = SubResource( 2 )
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 1.0022
+margin_right = 1.0022
+custom_styles/panel = SubResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer"]
+margin_left = 10.0
+margin_top = 10.0
+margin_right = 1014.0
+margin_bottom = 590.0
+custom_constants/margin_right = 40
+custom_constants/margin_top = 40
+custom_constants/margin_left = 40
+custom_constants/margin_bottom = 40
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Rows" type="VBoxContainer" parent="PanelContainer/MarginContainer"]
+margin_left = 40.0
+margin_top = 40.0
+margin_right = 964.0
+margin_bottom = 540.0
+custom_constants/separation = 80
+
+[node name="Title" type="Label" parent="PanelContainer/MarginContainer/Rows"]
+margin_right = 924.0
+margin_bottom = 86.0
+custom_fonts/font = ExtResource( 2 )
+text = "GAME OVER"
+align = 1
+
+[node name="CenterContainer" type="CenterContainer" parent="PanelContainer/MarginContainer/Rows"]
+margin_top = 166.0
+margin_right = 924.0
+margin_bottom = 408.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer/Rows/CenterContainer"]
+margin_left = 335.0
+margin_right = 589.0
+margin_bottom = 242.0
+custom_constants/separation = 40
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RestartButton" type="Button" parent="PanelContainer/MarginContainer/Rows/CenterContainer/VBoxContainer"]
+margin_right = 254.0
+margin_bottom = 54.0
+custom_fonts/font = ExtResource( 1 )
+text = " RESTART "
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MainMenuButton" type="Button" parent="PanelContainer/MarginContainer/Rows/CenterContainer/VBoxContainer"]
+margin_top = 94.0
+margin_right = 254.0
+margin_bottom = 148.0
+custom_fonts/font = ExtResource( 1 )
+text = " MAIN MENU "
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="QuitButton" type="Button" parent="PanelContainer/MarginContainer/Rows/CenterContainer/VBoxContainer"]
+margin_top = 188.0
+margin_right = 254.0
+margin_bottom = 242.0
+custom_fonts/font = ExtResource( 1 )
+text = "QUIT"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Overlay" type="PanelContainer" parent="."]
+modulate = Color( 1, 1, 1, 0 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+custom_styles/panel = SubResource( 3 )
+
+[connection signal="pressed" from="PanelContainer/MarginContainer/Rows/CenterContainer/VBoxContainer/RestartButton" to="." method="_on_RestartButton_pressed"]
+[connection signal="pressed" from="PanelContainer/MarginContainer/Rows/CenterContainer/VBoxContainer/MainMenuButton" to="." method="_on_MainMenuButton_pressed"]
+[connection signal="pressed" from="PanelContainer/MarginContainer/Rows/CenterContainer/VBoxContainer/QuitButton" to="." method="_on_QuitButton_pressed"]
